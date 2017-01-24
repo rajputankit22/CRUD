@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Sr No.</th>
+          <th>Reg No.</th>
+          <th>Roll No.</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% student.forEach(function(s, idx) { %>
+      <!-- <h3><%= s.age %></h3><br> -->
+
+
+          <tr>
+            <td><%= idx+1 %></td>
+            <td><%= s.rollno %></td>
+            <td><%= s.regno %></td>
+            <td><%= s.name.first + " " + s.name.last %></td>
+            <td><%= s.address.city + "," + s.address.state + ","+s.address.country %></td>
+            <td><button class="btn btn-primary btn-sm btn-danger del_button"  name="button" data-student-id="<%= s._id %>">Del<button class="btn btn-primary btn-sm edit_button" name="button" data-student-id="<%= s._id %>">Edit</button></td>
+          </tr>
+
+      <% }) %>
+    </tbody>
+  </table>
+  <script type="text/javascript">
+    $('.edit_button').click(function (e) {
+      e.preventDefault();
+      window.location.href="/student/edit/" + $(this).data("student-id");
+
+    });
+    $('.del_button').click(function(evt){
+      
+   			evt.preventDefault();
+        $.ajax({
+            type: 'DELETE',
+            url: '/student/'+ $(this).data('student-id'),
+            success : function(result){
+              console.log(result);
+              if (!result.error) {
+                window.location.reload();
+              }
+            }
+        })
+        });
+  </script>
+
+  </body>
+</html>

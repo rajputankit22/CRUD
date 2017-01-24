@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style media="screen">
+      .container1 {
+                 /*background-image: url(https://i.stack.imgur.com/s3BcM.png);*/
+                 background-color: rgb(0, 153, 51);
+                 opacity: 0.9;
+      }
+      .container {
+
+                 background-image: url(https://www.immigrationdirect.com/blog/wp-content/uploads/2012/08/Form-I-90-image.jpg);
+                 /*background-color: yellow;*/
+      }
+      .body {
+              padding:0px 0px 0px 0px;
+      }
+
+    </style>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+  <body class="body">
+    <div class="container">
+
+
+    <div class="container1 col-lg-4 col-lg-offset-4">
+    <h1><%= title %></h1>
+    <form id="form_id" class="" action="index.html" method="post">
+    <div class="form-group has-success">
+    <label for="name">Name :</label>
+    <input id="name" class="form-control" type="text" placeholder="Ankit" value="<%= student.name.first %>">
+    </div>
+    <div class="form-group has-success">
+    <label for="surname">Last Name :</label>
+    <input id="surname" class="form-control" type="text" placeholder="Rajpoot" value="<%= student.name.last %>">
+  </div>
+  <div class="form-group has-success">
+    <label for="rollno">Roll No. :</label>
+    <input id="rollno" class="form-control" type="number" placeholder="14/CA/652" value="<%= student.rollno %>">
+  </div>
+  <div class="form-group has-success">
+    <label for="regno">Reg No. :</label>
+    <input id="regno" class="form-control" type="text" placeholder="20148399" value="<%= student.regno %>">
+  </div>
+  <div class="form-group has-success">
+    <label for="age">Age :</label>
+    <input id="age" class="form-control" type="number"placeholder="23"  value="<%= student.age %>">
+  </div>
+  <div class="form-group has-success">
+    <label for="clgname">College Name :</label>
+    <input id="clgname" class="form-control" type="text" placeholder="NIT Durgapur"  value="<%= student.clgname %>">
+  </div>
+  <div class="form-group has-success">
+    <label for="city">City :</label>
+    <input id="city" class="form-control" type="text" placeholder="Kolkata" value="<%= student.address.city %>">
+  </div>
+  <div class="form-group has-success">
+    <label for="state">State :</label>
+    <input id="state" class="form-control" type="text" placeholder="West Bengal" value="<%= student.address.state %>">
+  </div>
+  <div class="form-group has-success">
+    <label for="country">Country :</label>
+    <input id="country" class="form-control" type="text" placeholder="India" value="<%= student.address.country %>">
+  </div>
+  <div class="form-group has-success">
+    <button id="add" class="btn btn-primary" name="button">Submit</button>
+  </div>
+    </form>
+    </div>
+    </div>
+    <script>
+  $(document).ready(function() {
+
+    $('#add').click(function () {
+    var student = {
+      name : {
+          first : $('#name').val(),
+          last : $('#surname').val()
+        },
+        rollno :$('#rollno').val(),
+        regno :$('#regno').val(),
+        age :$('#age').val(),
+        clgname :$('#clgname').val(),
+        address : {
+            city :$('#city').val(),
+            state :$('#state').val(),
+            country :$('#country').val()
+        }
+      }
+        $.ajax({
+        type:"PUT",
+        //cache:false,
+        url:"/student/"+ '<%= student._id %>',
+        data: student,    // multiple data sent using ajax,send all form contant by a single object
+        success: function (result) {
+                    console.log('Data added successfully');
+        }
+      });
+      return false;
+    });
+  });
+</script>
+
+  </body>
+</html>

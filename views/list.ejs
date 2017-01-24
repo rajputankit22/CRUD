@@ -33,7 +33,7 @@
             <td><%= s.regno %></td>
             <td><%= s.name.first + " " + s.name.last %></td>
             <td><%= s.address.city + "," + s.address.state + ","+s.address.country %></td>
-            <td><button class="btn btn-primary btn-sm btn-danger del_button"  name="button" data-student-id="<%= s._id %>">Del<button class="btn btn-primary btn-sm edit_button" name="button" data-student-id="<%= s._id %>">Edit</button></td>
+            <td><button class="btn btn-primary btn-sm btn-danger del_button"  name="button" data-student-id="<%= s._id %>">Del</button> <button class="btn btn-primary btn-sm edit_button" name="button" data-student-id="<%= s._id %>">Edit</button></td>
           </tr>
 
       <% }) %>
@@ -46,7 +46,7 @@
 
     });
     $('.del_button').click(function(evt){
-      
+
    			evt.preventDefault();
         $.ajax({
             type: 'DELETE',

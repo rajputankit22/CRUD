@@ -21,4 +21,4 @@ var StudentSchema = new mongoose.Schema({
         country :String
     }
 });
-module.exports = mongoose.model("Student", StudentSchema);
+module.exports = mongoose.model("QuestionBank", StudentSchema);
